@@ -22,4 +22,11 @@ user.get("/:id", async (req, res) => {
   const result = await userModel.findById(req.params.id);
   res.json(result);
 });
+
+user.put('/:id', async (req,res)=>{
+  const result = await userModel.update(req.params.id, req.body)
+  res.json(result)
+});
+
+
 module.exports = user;
