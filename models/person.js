@@ -33,11 +33,10 @@ const findById = async (id) => {
   return result.records[0].get("u").properties;
 };
 
-const deleted = async (id) =>{
-    await session.run(`MATCH (u:User {_id : '${id}'}) DETACH DELETE u`)
-    return await findAll()
+const deleted = async (id) => {
+  await session.run(`MATCH (u:User {_id : '${id}'}) DETACH DELETE u`);
+  return await findAll();
 };
-
 
 const update = async (id, user) => {
   const result = await session.run(
@@ -45,6 +44,7 @@ const update = async (id, user) => {
   );
   return await findById(id);
 };
+
 const createRelation = async (user) => {
   const result = await session.run(
     `MATCH
@@ -62,8 +62,5 @@ module.exports = {
   findById,
   update,
   deleted,
-  createRelation
+  createRelation,
 };
-
-
-
