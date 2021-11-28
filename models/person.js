@@ -52,3 +52,16 @@ module.exports = {
   update,
   deleted
 };
+
+const createRelation = async (user) => {
+  const result = await session.run(
+    `MATCH
+  (a:User),
+  (b:User)
+WHERE a.fname = '${user.user1}' AND b.fname = '${user.user2}'
+CREATE (a)-[r:Friends]->(b)
+RETURN type(r)`
+  );
+  return result;
+};
+
