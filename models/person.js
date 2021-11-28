@@ -33,12 +33,15 @@ const findById = async (id) => {
   return result.records[0].get("u").properties;
 };
 
-const findByIdAndUpdate = async (id, user) =>{
-  const result = await session.run(`MATCH (u:User {_id : '${id}'}) SET u.name= '${user.name}', u.email= '${user.email}', u.password= '${user.password}' return u`)
-  return result.records[0].get('u').properties
+const update = async (id, user) => {
+  const result = await session.run(
+    `MATCH (u:User {_id : '${id}'}) SET u.name= '${user.name}', u.email= '${user.email}', u.password= '${user.password}' return u`
+  );
+  return result.records[0].get("u").properties;
 };
 module.exports = {
   create,
   findAll,
   findById,
+  update,
 };
