@@ -41,7 +41,7 @@ const deleted = async (id) =>{
 
 const update = async (id, user) => {
   const result = await session.run(
-    `MATCH (u:User {_id : '${id}'}) SET u.name= '${user.name}', u.email= '${user.email}', u.password= '${user.password}' return u`
+    `MATCH (u:User {_id : '${id}'}) SET u.fname= '${user.fname}',u.lname= '${user.lname}', u.email= '${user.email}', u.password= '${user.password}' return u`
   );
   return await findById(id);
 };
