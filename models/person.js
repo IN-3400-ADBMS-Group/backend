@@ -3,9 +3,13 @@
 const nanoid = require("nanoid");
 const neo4j = require("neo4j-driver");
 require("dotenv").config();
-const { url, username, password, database } = process.env;
-console.log(url, username, password, database);
-const driver = neo4j.driver(url, neo4j.auth.basic(username, password), {});
+const { url, db_username, db_password, database } = process.env;
+console.log(url, db_username, db_password, database);
+const driver = neo4j.driver(
+  url,
+  neo4j.auth.basic(db_username, db_password),
+  {}
+);
 
 const session = driver.session({ database });
 
@@ -15,11 +19,13 @@ const findAll = async () => {
 };
 
 const create = async (user) => {
-  const unique_id = nanoid(8);
   const result = await session.run(
-    `CREATE (u:User {_id : '${unique_id}', fname: '${user.fname}',lname: '${user.lname}', email: '${user.email}', password: '${user.password}'} ) return u`
+    `CREATE (u:User { fname: '${user.fname}',lname: '${user.lname}', email: '${user.email}', password: '${user.password}'} ) return u`
   );
-  return result.records[0].properties;
+  return result.records;
 };
 
-module.exports = create;
+module.exports = {
+  create,
+  findAll,
+};
