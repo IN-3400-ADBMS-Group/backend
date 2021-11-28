@@ -34,7 +34,7 @@ const findById = async (id) => {
 };
 
 const deleted = async (id) =>{
-    await session.run(`MATCH (u:User {_id : '${id}'}) DELETE u`)
+    await session.run(`MATCH (u:User {_id : '${id}'}) DETACH DELETE u`)
     return await findAll()
 };
 
