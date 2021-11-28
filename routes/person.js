@@ -23,19 +23,21 @@ user.get("/:id", async (req, res) => {
   res.json(result);
 });
 
-user.put('/:id', async (req,res)=>{
-  const result = await userModel.update(req.params.id, req.body)
-  res.json(result)
+user.put("/:id", async (req, res) => {
+  const result = await userModel.update(req.params.id, req.body);
+  res.json(result);
 });
-user.delete('/:id', async (req,res)=>{
-    const result = await userModel.deleted(req.params.id)
-    res.json(result)
+user.delete("/:id", async (req, res) => {
+  const result = await userModel.deleted(req.params.id);
+  res.json(result);
 });
-
 
 user.post("/create", async (req, res) => {
   const result = await userModel.createRelation(req.body);
   res.json(result);
 });
-
+user.get("/friends", async (req, res) => {
+  const result = await userModel.friends(req.body);
+  res.json(result);
+});
 module.exports = user;

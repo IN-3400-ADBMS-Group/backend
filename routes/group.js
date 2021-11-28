@@ -24,5 +24,8 @@ group.post("/create", async (req, res) => {
   const result = await groupModel.createRelation(req.body);
   res.json(result);
 });
-
+group.get("/follow", async (req, res) => {
+  const result = await groupModel.follow(req.body);
+  res.json(result);
+});
 module.exports = group;

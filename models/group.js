@@ -44,10 +44,17 @@ RETURN type(r)`
   );
   return result;
 };
-
+const follow = async (user) => {
+  const result = await session.run(
+    `MATCH (:User {name: '${user.fname}'})-->(group)
+RETURN group.name`
+  );
+  return result;
+};
 module.exports = {
   create,
   findAll,
   findById,
   createRelation,
+  follow,
 };
