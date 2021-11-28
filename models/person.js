@@ -50,4 +50,5 @@ module.exports = {
   findAll,
   findById,
   update,
+  deleted
 };
