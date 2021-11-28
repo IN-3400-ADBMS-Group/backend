@@ -33,6 +33,9 @@ user.delete('/:id', async (req,res)=>{
 });
 
 
-
+user.post("/create", async (req, res) => {
+  const result = await userModel.createRelation(req.body);
+  res.json(result);
+});
 
 module.exports = user;
