@@ -28,4 +28,8 @@ group.get("/follow", async (req, res) => {
   const result = await groupModel.follow(req.body);
   res.json(result);
 });
+group.delete("/delete", async (req, res) => {
+  const result = await userModel.deletedRelation(req.body);
+  res.json(result);
+});
 module.exports = group;

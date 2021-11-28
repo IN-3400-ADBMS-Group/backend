@@ -15,6 +15,7 @@ const session = driver.session({ database });
 
 const findAll = async () => {
   const result = await session.run(`Match (g:Group) return g`);
+  console.log(result);
   return result.records.map((i) => i.get("g").properties);
 };
 
@@ -46,15 +47,21 @@ RETURN type(r)`
 };
 const follow = async (user) => {
   const result = await session.run(
-    `MATCH (:User {name: '${user.fname}'})-->(group)
-RETURN group.name`
+    `MATCH (u:User {fname: '${res.fname}'})-->(Group) RETURN Group.name`
   );
   return result;
 };
+const deletedRelation = async (user) => {
+  await session.run(`MATCH (n {fname: '${user.fname}'})-[r:Follows]->()
+DELETE r`);
+  return await findAll();
+};
+
 module.exports = {
   create,
   findAll,
   findById,
   createRelation,
   follow,
+  deletedRelation,
 };

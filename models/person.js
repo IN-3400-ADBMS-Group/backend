@@ -56,12 +56,16 @@ RETURN type(r)`
   );
   return result;
 };
-const friends = async (user) => {
+const friends = async (res) => {
   const result = await session.run(
-    `MATCH (:User {name: '${user.fname}'})-->(user)
-RETURN user.fname`
+    `MATCH (u:User {fname: '${res.fname}'})-->(User) RETURN User.fname`
   );
   return result;
+};
+const deletedRelation = async (user) => {
+  await session.run(`MATCH (n {fname: '${user.fname}'})-[r:Friends]->()
+DELETE r`);
+  return await findAll();
 };
 module.exports = {
   create,
@@ -71,4 +75,5 @@ module.exports = {
   deleted,
   createRelation,
   friends,
+  deletedRelation,
 };

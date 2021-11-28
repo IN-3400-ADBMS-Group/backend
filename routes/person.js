@@ -40,4 +40,8 @@ user.get("/friends", async (req, res) => {
   const result = await userModel.friends(req.body);
   res.json(result);
 });
+user.delete("/delete", async (req, res) => {
+  const result = await userModel.deletedRelation(req.body);
+  res.json(result);
+});
 module.exports = user;
