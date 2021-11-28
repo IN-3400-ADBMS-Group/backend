@@ -45,14 +45,6 @@ const update = async (id, user) => {
   );
   return await findById(id);
 };
-module.exports = {
-  create,
-  findAll,
-  findById,
-  update,
-  deleted
-};
-
 const createRelation = async (user) => {
   const result = await session.run(
     `MATCH
@@ -64,4 +56,14 @@ RETURN type(r)`
   );
   return result;
 };
+module.exports = {
+  create,
+  findAll,
+  findById,
+  update,
+  deleted,
+  createRelation
+};
+
+
 
