@@ -43,7 +43,7 @@ const update = async (id, user) => {
   const result = await session.run(
     `MATCH (u:User {_id : '${id}'}) SET u.name= '${user.name}', u.email= '${user.email}', u.password= '${user.password}' return u`
   );
-  return result.records[0].get("u").properties;
+  return await findById(id);
 };
 module.exports = {
   create,
