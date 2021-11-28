@@ -1,4 +1,4 @@
-const userM = require("../models/person");
+const user = require("../models/person");
 const { Router } = require("express");
 const express = require("express");
 const router = express.Router();
@@ -9,13 +9,17 @@ const router = express.Router();
 const user = Router();
 
 user.get("/", async (req, res) => {
-  const result = await userM.findAll();
+  const result = await user.findAll();
   res.json(result);
 });
 
 user.post("/", async (req, res) => {
-  const result = await userM.create(req.body);
+  const result = await user.create(req.body);
   res.json(result);
 });
 
+user.get("/:id", async (req, res) => {
+  const result = await userModel.findById(req.params.id);
+  res.json(result);
+});
 module.exports = user;
