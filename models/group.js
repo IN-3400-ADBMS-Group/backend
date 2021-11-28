@@ -33,8 +33,21 @@ const findById = async (id) => {
   return result.records[0].get("g").properties;
 };
 
+const createRelation = async (res) => {
+  const result = await session.run(
+    `MATCH
+  (u:User),
+  (g:Group)
+WHERE u.fname = '${res.user}' AND g.name = '${res.group}'
+CREATE (u)-[r:Follows]->(g)
+RETURN type(r)`
+  );
+  return result;
+};
+
 module.exports = {
   create,
   findAll,
   findById,
+  createRelation,
 };

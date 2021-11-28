@@ -11,6 +11,9 @@ app.use(express.urlencoded({ extended: true }));
 const user = require("./routes/person");
 app.use("/", user);
 
+const group = require("./routes/group");
+app.use("/group", group);
+
 app.listen("3001", () => {
   console.log("running");
 });
