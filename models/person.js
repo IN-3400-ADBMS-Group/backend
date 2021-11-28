@@ -26,6 +26,12 @@ const create = async (user) => {
   return result.records;
 };
 
+const findById = async (id) => {
+  const result = await session.run(
+    `MATCH (u:User {_id : '${id}'} )return u limit 1`
+  );
+  return result.records[0].get("u").properties;
+};
 module.exports = {
   create,
   findAll,
