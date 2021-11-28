@@ -1,6 +1,6 @@
 // npm install --save neo4j-driver
 // node example.js
-const nanoid = require("nanoid");
+var { nanoid } = require("nanoid");
 const neo4j = require("neo4j-driver");
 require("dotenv").config();
 const { url, db_username, db_password, database } = process.env;
@@ -19,8 +19,9 @@ const findAll = async () => {
 };
 
 const create = async (user) => {
+  var unique_id = nanoid(8);
   const result = await session.run(
-    `CREATE (u:User { fname: '${user.fname}',lname: '${user.lname}', email: '${user.email}', password: '${user.password}'} ) return u`
+    `CREATE (u:User { _id : '${unique_id}',fname: '${user.fname}',lname: '${user.lname}', email: '${user.email}', password: '${user.password}'} ) return u`
   );
   return result.records;
 };
