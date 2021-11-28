@@ -27,6 +27,12 @@ user.put('/:id', async (req,res)=>{
   const result = await userModel.update(req.params.id, req.body)
   res.json(result)
 });
+user.delete('/:id', async (req,res)=>{
+    const result = await userModel.deleted(req.params.id)
+    res.json(result)
+});
+
+
 
 
 module.exports = user;
