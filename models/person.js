@@ -15,7 +15,7 @@ const session = driver.session({ database });
 
 const findAll = async () => {
   const result = await session.run(`Match (u:User) return u`);
-  return result.records[0].get("u").properties;
+  return result.records.map((i) => i.get("u").properties);
 };
 
 const create = async (user) => {
